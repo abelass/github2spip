@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/github_repos, par=titre, env, ajax, sinon=<:github_repo:info_aucun_github_repo:>}>
+
+[(#AUTORISER{creer,github_repo})
+	[(#URL_ECRIRE{github_repo_edit,new=oui}|icone_verticale{<:github_repo:icone_creer_github_repo:>,github_repo,new,right})]
+]

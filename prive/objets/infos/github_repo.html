@@ -1,0 +1,28 @@
+<BOUCLE_github_repo(GITHUB_REPOS){id_github_repo=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:github_repo:titre_github_repo:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_GITHUB_REPO</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{github_repos,#ID_GITHUB_REPO})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(GITHUB_REPOS){id_github_repo}>
+	[(#VAL{redirect}
+		|generer_url_action{type=github_repos&id=#ID_GITHUB_REPO}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,github_repos,#ID_GITHUB_REPO,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=github_repos&id=#ID_GITHUB_REPO}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_github_repo>

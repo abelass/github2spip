@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,github_depot,#ID_GITHUB_DEPOT}|sinon_interdire_acces)]
+<BOUCLE_github_depot(GITHUB_DEPOTS){id_github_depot}{statut==.*}{si #ENV{exec}|=={github_depot}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,github_depot,#ID_GITHUB_DEPOT})
+		[(#ID_GITHUB_DEPOT|afficher_qui_edite{github_depot}|non)
+			[(#URL_ECRIRE{github_depot_edit,id_github_depot=#ID_GITHUB_DEPOT}|icone_verticale{<:github_depot:icone_modifier_github_depot:>,github_depot,edit,right ajax preload})]
+		]
+		[(#ID_GITHUB_DEPOT|afficher_qui_edite{github_depot}|oui)
+			[(#URL_ECRIRE{github_depot_edit,id_github_depot=#ID_GITHUB_DEPOT}|icone_verticale{#ID_GITHUB_DEPOT|afficher_qui_edite{github_depot},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{github_depot-24.png}|balise_img{github_depot,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{github_depot,#ID_GITHUB_DEPOT}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/github_depot,id=#ID_GITHUB_DEPOT,id_github_depot=#ID_GITHUB_DEPOT,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,github_depot,#ID_GITHUB_DEPOT})
+	[(#ID_GITHUB_DEPOT|afficher_qui_edite{github_depot}|non)
+		[(#URL_ECRIRE{github_depot_edit,id_github_depot=#ID_GITHUB_DEPOT}|icone_verticale{<:github_depot:icone_modifier_github_depot:>,github_depot,edit,right ajax preload})]
+	]
+	[(#ID_GITHUB_DEPOT|afficher_qui_edite{github_depot}|oui)
+		[(#URL_ECRIRE{github_depot_edit,id_github_depot=#ID_GITHUB_DEPOT}|icone_verticale{#ID_GITHUB_DEPOT|afficher_qui_edite{github_depot},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,github_depot,id,#ID_GITHUB_DEPOT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_github_depot>
+[(#ENV**{exec}|=={github_depot_edit}|?{#INCLURE{fond=prive/squelettes/contenu/github_depot_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_github_depot>

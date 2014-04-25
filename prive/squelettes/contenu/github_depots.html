@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/github_depots, par=titre, env, ajax, sinon=<:github_depot:info_aucun_github_depot:>}>
+
+[(#AUTORISER{creer,github_depot})
+	[(#URL_ECRIRE{github_depot_edit,new=oui}|icone_verticale{<:github_depot:icone_creer_github_depot:>,github_depot,new,right})]
+]

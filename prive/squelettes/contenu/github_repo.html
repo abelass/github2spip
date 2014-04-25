@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,github_repo,#ID_GITHUB_REPO}|sinon_interdire_acces)]
+<BOUCLE_github_repo(GITHUB_REPOS){id_github_repo}{statut==.*}{si #ENV{exec}|=={github_repo}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,github_repo,#ID_GITHUB_REPO})
+		[(#ID_GITHUB_REPO|afficher_qui_edite{github_repo}|non)
+			[(#URL_ECRIRE{github_repo_edit,id_github_repo=#ID_GITHUB_REPO}|icone_verticale{<:github_repo:icone_modifier_github_repo:>,github_repo,edit,right ajax preload})]
+		]
+		[(#ID_GITHUB_REPO|afficher_qui_edite{github_repo}|oui)
+			[(#URL_ECRIRE{github_repo_edit,id_github_repo=#ID_GITHUB_REPO}|icone_verticale{#ID_GITHUB_REPO|afficher_qui_edite{github_repo},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{github_repo-24.png}|balise_img{github_repo,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{github_repo,#ID_GITHUB_REPO}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/github_repo,id=#ID_GITHUB_REPO,id_github_repo=#ID_GITHUB_REPO,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,github_repo,#ID_GITHUB_REPO})
+	[(#ID_GITHUB_REPO|afficher_qui_edite{github_repo}|non)
+		[(#URL_ECRIRE{github_repo_edit,id_github_repo=#ID_GITHUB_REPO}|icone_verticale{<:github_repo:icone_modifier_github_repo:>,github_repo,edit,right ajax preload})]
+	]
+	[(#ID_GITHUB_REPO|afficher_qui_edite{github_repo}|oui)
+		[(#URL_ECRIRE{github_repo_edit,id_github_repo=#ID_GITHUB_REPO}|icone_verticale{#ID_GITHUB_REPO|afficher_qui_edite{github_repo},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,github_repo,id,#ID_GITHUB_REPO},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_github_repo>
+[(#ENV**{exec}|=={github_repo_edit}|?{#INCLURE{fond=prive/squelettes/contenu/github_repo_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_github_repo>

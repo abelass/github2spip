@@ -1,0 +1,28 @@
+<BOUCLE_github_depot(GITHUB_DEPOTS){id_github_depot=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:github_depot:titre_github_depot:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_GITHUB_DEPOT</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{github_depots,#ID_GITHUB_DEPOT})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(GITHUB_DEPOTS){id_github_depot}>
+	[(#VAL{redirect}
+		|generer_url_action{type=github_depots&id=#ID_GITHUB_DEPOT}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,github_depots,#ID_GITHUB_DEPOT,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=github_depots&id=#ID_GITHUB_DEPOT}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_github_depot>
