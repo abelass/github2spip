@@ -105,7 +105,7 @@ function github2spip_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('titre', 'url_repo'),
 		'champs_versionnes' => array('titre', 'url_repo'),
 		'rechercher_champs' => array("titre" => 8, "url_repo" => 2),
-		'tables_jointures'  => array(),
+		'tables_jointures'  => array('spip_github_repos_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
@@ -152,6 +152,18 @@ function github2spip_declarer_tables_auxiliaires($tables) {
 		'key' => array(
 			"PRIMARY KEY"        => "id_github_depot,id_objet,objet",
 			"KEY id_github_depot" => "id_github_depot"
+		)
+	);
+	$tables['spip_github_repos_liens'] = array(
+		'field' => array(
+			"id_github_repo"     => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"        => "id_github_repo,id_objet,objet",
+			"KEY id_github_repo" => "id_github_repo"
 		)
 	);
 

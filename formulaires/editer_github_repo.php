@@ -21,6 +21,9 @@ include_spip('inc/editer');
  *     Identifiant du github_repo. 'new' pour un nouveau github_repo.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le github_repo créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un github_repo source d'une traduction
  * @param string $config_fonc
@@ -32,8 +35,8 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_github_repo_identifier_dist($id_github_repo='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return serialize(array(intval($id_github_repo)));
+function formulaires_editer_github_repo_identifier_dist($id_github_repo='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return serialize(array(intval($id_github_repo), $associer_objet));
 }
 
 /**
@@ -47,6 +50,9 @@ function formulaires_editer_github_repo_identifier_dist($id_github_repo='new', $
  *     Identifiant du github_repo. 'new' pour un nouveau github_repo.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le github_repo créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un github_repo source d'une traduction
  * @param string $config_fonc
@@ -58,8 +64,9 @@ function formulaires_editer_github_repo_identifier_dist($id_github_repo='new', $
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_github_repo_charger_dist($id_github_repo='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_github_repo_charger_dist($id_github_repo='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('github_repo',$id_github_repo,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs['_hidden'].='<input type="hidden" name="statut" value="publie"/>';
 	return $valeurs;
 }
 
@@ -74,6 +81,9 @@ function formulaires_editer_github_repo_charger_dist($id_github_repo='new', $ret
  *     Identifiant du github_repo. 'new' pour un nouveau github_repo.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le github_repo créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un github_repo source d'une traduction
  * @param string $config_fonc
@@ -85,7 +95,7 @@ function formulaires_editer_github_repo_charger_dist($id_github_repo='new', $ret
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_github_repo_verifier_dist($id_github_repo='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_github_repo_verifier_dist($id_github_repo='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
 	return formulaires_editer_objet_verifier('github_repo',$id_github_repo, array('titre'));
 
@@ -102,6 +112,9 @@ function formulaires_editer_github_repo_verifier_dist($id_github_repo='new', $re
  *     Identifiant du github_repo. 'new' pour un nouveau github_repo.
  * @param string $retour
  *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le github_repo créé à cet objet,
+ *     tel que `article|3`
  * @param int $lier_trad
  *     Identifiant éventuel d'un github_repo source d'une traduction
  * @param string $config_fonc
@@ -113,8 +126,23 @@ function formulaires_editer_github_repo_verifier_dist($id_github_repo='new', $re
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_github_repo_traiter_dist($id_github_repo='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('github_repo',$id_github_repo,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_github_repo_traiter_dist($id_github_repo='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$res = formulaires_editer_objet_traiter('github_repo',$id_github_repo,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+ 
+	// Un lien a prendre en compte ?
+	if ($associer_objet AND $id_github_repo = $res['id_github_repo']) {
+		list($objet, $id_objet) = explode('|', $associer_objet);
+
+		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
+			include_spip('action/editer_liens');
+			objet_associer(array('github_repo' => $id_github_repo), array($objet => $id_objet));
+			if (isset($res['redirect'])) {
+				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_github_repo, '&');
+			}
+		}
+	}
+	return $res;
+
 }
 
 

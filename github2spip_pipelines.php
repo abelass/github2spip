@@ -34,10 +34,18 @@ function github2spip_affiche_milieu($flux) {
 
 
 
-	// github_depots sur les github_depots, github_repos
-	if (!$e['edition'] AND in_array($e['type'], array('github_depot', 'github_repo'))) {
+	// github_depots sur les github_depots
+	if (!$e['edition'] AND in_array($e['type'], array('github_depot'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'github_depots',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+	}
+	// github_repos sur les github_depots
+	if (!$e['edition'] AND in_array($e['type'], array('github_depot'))) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'github_repos',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
@@ -65,7 +73,7 @@ function github2spip_affiche_milieu($flux) {
  */
 function github2spip_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('github_depot'=>'*'),'*');
+	$flux['data'] += objet_optimiser_liens(array('github_depot'=>'*', 'github_repo'=>'*'),'*');
 	return $flux;
 }
 

@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,github_repo,#ID_GITHUB_REPO}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,github_repo}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_GITHUB_REPO|?{#ID_GITHUB_REPO|generer_url_entite{github_repo},#URL_ECRIRE{github_repos}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_GITHUB_REPO|oui)
+	[(#GET{redirect}|icone_verticale{Retour,github_repo,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_GITHUB_REPO|?{<:github_repo:icone_modifier_github_repo:>,<:github_repo:icone_creer_github_repo:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{github_repo,#ID_GITHUB_REPO}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_GITHUB_REPO|generer_url_entite{github_repo}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_GITHUB_REPO{#ENV{id_github_repo,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

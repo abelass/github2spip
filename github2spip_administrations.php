@@ -49,7 +49,7 @@ function github2spip_upgrade($nom_meta_base_version, $version_cible) {
 	# );
 	# ...
 
-	$maj['create'] = array(array('maj_tables', array('spip_github_depots', 'spip_github_depots_liens', 'spip_github_repos')));
+	$maj['create'] = array(array('maj_tables', array('spip_github_depots', 'spip_github_depots_liens', 'spip_github_repos', 'spip_github_repos_liens')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -77,6 +77,7 @@ function github2spip_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_github_depots");
 	sql_drop_table("spip_github_depots_liens");
 	sql_drop_table("spip_github_repos");
+	sql_drop_table("spip_github_repos_liens");
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",              sql_in("objet", array('github_depot', 'github_repo')));

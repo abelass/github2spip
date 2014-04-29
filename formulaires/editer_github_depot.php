@@ -66,6 +66,7 @@ function formulaires_editer_github_depot_identifier_dist($id_github_depot='new',
  */
 function formulaires_editer_github_depot_charger_dist($id_github_depot='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('github_depot',$id_github_depot,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs['_hidden'].='<input type="hidden" name="statut" value="publie"/>';
 	return $valeurs;
 }
 
