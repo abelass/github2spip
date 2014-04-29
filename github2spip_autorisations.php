@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Github_spip\Autorisations
+ * @package    SPIP\Github2spip\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -20,13 +20,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function github_spip_autoriser(){}
+function github2spip_autoriser(){}
 
 
 /* Exemple
-function autoriser_configurer_github_spip_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_configurer_github2spip_dist($faire, $type, $id, $qui, $opt) {
 	// type est un objet (la plupart du temps) ou une chose.
-	// autoriser('configurer', '_github_spip') => $type = 'github_spip'
+	// autoriser('configurer', '_github2spip') => $type = 'github2spip'
 	// au choix
 	return autoriser('webmestre', $type, $id, $qui, $opt); // seulement les webmestres
 	return autoriser('configurer', '', $id, $qui, $opt); // seulement les administrateurs complets

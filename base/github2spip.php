@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Github_spip\Pipelines
+ * @package    SPIP\Github2spip\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function github_spip_declarer_tables_interfaces($interfaces) {
+function github2spip_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['github_depots'] = 'github_depots';
 	$interfaces['table_des_tables']['github_repos'] = 'github_repos';
@@ -39,9 +39,9 @@ function github_spip_declarer_tables_interfaces($interfaces) {
  * @return array
  *     Description complétée des tables
  */
-function github_spip_declarer_tables_objets_sql($tables) {
+function github2spip_declarer_tables_objets_sql($tables) {
 
-	$tables['github_depots'] = array(
+	$tables['spip_github_depots'] = array(
 		'type' => 'github_depot',
 		'principale' => "oui", 
 		'table_objet_surnoms' => array('githubdepot'), // table_objet('github_depot') => 'github_depots' 
@@ -62,7 +62,7 @@ function github_spip_declarer_tables_objets_sql($tables) {
 		'champs_editables'  => array('titre', 'descriptif'),
 		'champs_versionnes' => array('titre', 'descriptif'),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 4),
-		'tables_jointures'  => array('github_depots_liens'),
+		'tables_jointures'  => array('spip_github_depots_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
@@ -84,7 +84,7 @@ function github_spip_declarer_tables_objets_sql($tables) {
 
 	);
 
-	$tables['github_repos'] = array(
+	$tables['spip_github_repos'] = array(
 		'type' => 'github_repo',
 		'principale' => "oui", 
 		'table_objet_surnoms' => array('githubrepo'), // table_objet('github_repo') => 'github_repos' 
@@ -140,9 +140,9 @@ function github_spip_declarer_tables_objets_sql($tables) {
  * @return array
  *     Description complétée des tables
  */
-function github_spip_declarer_tables_auxiliaires($tables) {
+function github2spip_declarer_tables_auxiliaires($tables) {
 
-	$tables['github_depots_liens'] = array(
+	$tables['spip_github_depots_liens'] = array(
 		'field' => array(
 			"id_github_depot"    => "bigint(21) DEFAULT '0' NOT NULL",
 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",

@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Github_spip\Installation
+ * @package    SPIP\Github2spip\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function github_spip_upgrade($nom_meta_base_version, $version_cible) {
+function github2spip_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	# quelques exemples
 	# (que vous pouvez supprimer !)
@@ -38,7 +38,7 @@ function github_spip_upgrade($nom_meta_base_version, $version_cible) {
 	# include_spip('inc/config')
 	# $maj['create'] = array(
 	#	array('maj_tables', array('spip_xx', 'spip_xx_liens')),
-	#	array('ecrire_config', array('github_spip', array('exemple' => "Texte de l'exemple")))
+	#	array('ecrire_config', array('github2spip', array('exemple' => "Texte de l'exemple")))
 	#);
 	#
 	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
@@ -49,7 +49,7 @@ function github_spip_upgrade($nom_meta_base_version, $version_cible) {
 	# );
 	# ...
 
-	$maj['create'] = array(array('maj_tables', array('github_depots', 'github_depots_liens', 'github_repos')));
+	$maj['create'] = array(array('maj_tables', array('spip_github_depots', 'spip_github_depots_liens', 'spip_github_repos')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -68,15 +68,15 @@ function github_spip_upgrade($nom_meta_base_version, $version_cible) {
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function github_spip_vider_tables($nom_meta_base_version) {
+function github2spip_vider_tables($nom_meta_base_version) {
 	# quelques exemples
 	# (que vous pouvez supprimer !)
 	# sql_drop_table("spip_xx");
 	# sql_drop_table("spip_xx_liens");
 
-	sql_drop_table("github_depots");
-	sql_drop_table("github_depots_liens");
-	sql_drop_table("github_repos");
+	sql_drop_table("spip_github_depots");
+	sql_drop_table("spip_github_depots_liens");
+	sql_drop_table("spip_github_repos");
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",              sql_in("objet", array('github_depot', 'github_repo')));

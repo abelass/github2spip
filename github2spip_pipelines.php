@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Github_spip\Pipelines
+ * @package    SPIP\Github2spip\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -28,14 +28,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function github_spip_affiche_milieu($flux) {
+function github2spip_affiche_milieu($flux) {
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
 
 
-	// github_depots sur les github_repos
-	if (!$e['edition'] AND in_array($e['type'], array('github_repo'))) {
+	// github_depots sur les github_depots, github_repos
+	if (!$e['edition'] AND in_array($e['type'], array('github_depot', 'github_repo'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'github_depots',
 			'objet' => $e['type'],
@@ -63,7 +63,7 @@ function github_spip_affiche_milieu($flux) {
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function github_spip_optimiser_base_disparus($flux){
+function github2spip_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('github_depot'=>'*'),'*');
 	return $flux;

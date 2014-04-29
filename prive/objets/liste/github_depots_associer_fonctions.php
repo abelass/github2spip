@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Github_spip\Fonctions
+ * @package    SPIP\Github2spip\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
