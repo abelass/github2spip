@@ -5,6 +5,10 @@
 }})
 ]
 #SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#ENV
+<BOUCLE_lies(github_depots_liens){id_github_depot=#ID_OBJET}{objet=#ENV{objet}}>
+#ID_OBJET
+</BOUCLE_lies>
 #SET{debut,#ENV{debutgitl,#EVAL{_request("debutgitl");}}}
 <B_liste_github_depots>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle

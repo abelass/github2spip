@@ -4,7 +4,8 @@
 	id_github_depot,1
 }})
 ]
-#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}|array_merge{#LISTE{#ID_OBJET}}}
+[(#GET{exclus}|serialize)]
 #SET{debut,#ENV{debutgita,#EVAL{_request("debutgita");}}}
 <B_liste_github_depots>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
@@ -51,7 +52,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='statut'>[(#STATUT|puce_statut{github_depot})]</td> 
 			<td class='titre'>[(#LOGO_GITHUB_DEPOT|image_reduire{20,20})]<a href="[(#ID_GITHUB_DEPOT|generer_url_entite{github_depot})]">#TITRE</a></td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\[github_depot-#ID_GITHUB_DEPOT-#OBJET-#ID_OBJET\]" value="+"><:github_depot:ajouter_lien_github_depot:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button class="button link add" name="ajouter_lien_depot\[github_depot-#ID_GITHUB_DEPOT-#OBJET-#ID_OBJET\]" value="+"><:github_depot:ajouter_lien_github_depot:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
 	</BOUCLE_liste_github_depots>

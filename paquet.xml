@@ -41,7 +41,6 @@
 
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
 
-
 	<pipeline nom="autoriser" inclure="github2spip_autorisations.php" /> 
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/github2spip.php" /> 
