@@ -97,7 +97,7 @@ function formulaires_editer_github_repo_charger_dist($id_github_repo='new', $ret
  */
 function formulaires_editer_github_repo_verifier_dist($id_github_repo='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('github_repo',$id_github_repo, array('titre'));
+	return formulaires_editer_objet_verifier('github_repo',$id_github_repo, array('titre','url_repo'));
 
 }
 
