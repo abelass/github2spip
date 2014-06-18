@@ -52,5 +52,4 @@
 	<menu nom="github_depots" titre="github_depot:titre_github_depots" parent="menu_edition" icone="images/github_depot-16.png" action="github_depots" /> 
 	<menu nom="github_depot_creer" titre="github_depot:icone_creer_github_depot" parent="outils_rapides" icone="images/github_depot-new-16.png" action="github_depot_edit" parametres="new=oui" /> 
 	<menu nom="github_repos" titre="github_repo:titre_github_repos" parent="menu_edition" icone="images/github_repo-16.png" action="github_repos" /> 
-	<menu nom="github_repo_creer" titre="github_repo:icone_creer_github_repo" parent="outils_rapides" icone="images/github_repo-new-16.png" action="github_repo_edit" parametres="new=oui" /> 
 </paquet>
