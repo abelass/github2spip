@@ -1,9 +1,11 @@
 <BOUCLE_github_depot(GITHUB_DEPOTS){id_github_depot=#ENV{id}}{statut?}>
-<div class='infos'>
+<div class="infos">
 [(#SET{texte_objet,<:github_depot:titre_github_depot:>})]
-<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_GITHUB_DEPOT</p></div>
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_GITHUB_DEPOT</p></div>
 
 [(#FORMULAIRE_INSTITUER_OBJET{github_depots,#ID_GITHUB_DEPOT})]
+
+<div class='nb_elements'><!--nb_elements--></div>
 
 [(#REM)
 

@@ -3,13 +3,15 @@
  * Fichier gérant l'installation et désinstallation du plugin Gestionnaire de dépots GitHub 
  *
  * @plugin     Gestionnaire de dépots GitHub 
- * @copyright  2014
+ * @copyright  2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Github2spip\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /**
@@ -38,7 +40,7 @@ function github2spip_upgrade($nom_meta_base_version, $version_cible) {
 	# include_spip('inc/config')
 	# $maj['create'] = array(
 	#	array('maj_tables', array('spip_xx', 'spip_xx_liens')),
-	#	array('ecrire_config', array('github2spip', array('exemple' => "Texte de l'exemple")))
+	#	array('ecrire_config', 'github2spip', array('exemple' => "Texte de l'exemple"))
 	#);
 	#
 	# $maj['1.1.0']  = array(array('sql_alter','TABLE spip_xx RENAME TO spip_yy'));
@@ -71,20 +73,22 @@ function github2spip_upgrade($nom_meta_base_version, $version_cible) {
 function github2spip_vider_tables($nom_meta_base_version) {
 	# quelques exemples
 	# (que vous pouvez supprimer !)
-	# sql_drop_table("spip_xx");
-	# sql_drop_table("spip_xx_liens");
+	# sql_drop_table('spip_xx');
+	# sql_drop_table('spip_xx_liens');
 
-	sql_drop_table("spip_github_depots");
-	sql_drop_table("spip_github_depots_liens");
-	sql_drop_table("spip_github_repos");
-	sql_drop_table("spip_github_repos_liens");
+	sql_drop_table('spip_github_depots');
+	sql_drop_table('spip_github_depots_liens');
+	sql_drop_table('spip_github_repos');
+	sql_drop_table('spip_github_repos_liens');
 
+	# Nettoyer les liens courants (le génie optimiser_base_disparus se chargera de nettoyer toutes les tables de liens)
+	sql_delete('spip_documents_liens', sql_in('objet', array('github_depot', 'github_repo')));
+	sql_delete('spip_mots_liens', sql_in('objet', array('github_depot', 'github_repo')));
+	sql_delete('spip_auteurs_liens', sql_in('objet', array('github_depot', 'github_repo')));
 	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('github_depot', 'github_repo')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('github_depot', 'github_repo')));
-	sql_delete("spip_forum",                 sql_in("objet", array('github_depot', 'github_repo')));
+	sql_delete('spip_versions', sql_in('objet', array('github_depot', 'github_repo')));
+	sql_delete('spip_versions_fragments', sql_in('objet', array('github_depot', 'github_repo')));
+	sql_delete('spip_forum', sql_in('objet', array('github_depot', 'github_repo')));
 
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

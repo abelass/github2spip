@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_github_repos_selectionnes>
+	<ul>
+	<BOUCLE_github_repos_selectionnes(GITHUB_REPOS){id_github_repo IN #GET*{valeur}}
+		{par num nom, nom}{statut?}{tout}>
+		<li class="choix">#NOM (#ID_GITHUB_REPO)</li>
+	</BOUCLE_github_repos_selectionnes>
+	</ul>
+	</B_github_repos_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_github_repos_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_github_repo_selectionne(GITHUB_REPOS){id_github_repo=#ENV{valeur}}
+		{par num nom, nom}{statut?}{tout}>
+	  	<p>#NOM (#ID_GITHUB_REPO)</p>
+	</BOUCLE_github_repo_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_github_repo_selectionne>
+<//B_test_multiple>

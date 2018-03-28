@@ -3,13 +3,15 @@
  * Fonctions utiles au plugin Gestionnaire de dépots GitHub 
  *
  * @plugin     Gestionnaire de dépots GitHub 
- * @copyright  2014
+ * @copyright  2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Github2spip\Fonctions
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+	return;
+}
 
 
 /*
@@ -19,5 +21,3 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Il peut par exemple définir des filtres, critères, balises, …
  * 
  */
-
-?>

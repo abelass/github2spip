@@ -9,11 +9,11 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
+		<div class="editer-groupe">
 			[(#SAISIE{input, exemple,
 				label=<:github2spip:cfg_exemple:>,
 				explication=<:github2spip:cfg_exemple_explication:>})]
-		</ul>
+		</div>
 
 		<input type="hidden" name="_meta_casier" value="github2spip" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

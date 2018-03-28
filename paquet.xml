@@ -1,7 +1,7 @@
 <paquet
 	prefix="github2spip"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.16;3.0.*]"
 	logo="prive/themes/spip/images/github2spip-64.png"
@@ -9,13 +9,14 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet genere le 2014-04-29 09:15:41
+		Paquet généré le 2018-03-28 14:51:20
 		(Vous pouvez bien entendu supprimer ces commentaires) 
 	-->
 
 	<nom>Gestionnaire de dépots GitHub </nom>
+	<!-- Créer de dépots Spip depuis Github repositories -->
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
 	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
@@ -23,8 +24,8 @@
 	<!--
 		Exemple de commandes
 		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<necessite nom="saisies" compatibilite="[2.4.0;]" />
+		<utilise nom="saisies" compatibilite="[2.4.0;]" />
 		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
 		* pipelines
 		<pipeline nom="autoriser" inclure="github2spip_autorisations.php" />
@@ -32,14 +33,15 @@
 		* declarer un pipeline 
 		<pipeline nom="mon_pipeline" action="" />
 		* parents de menus de SPIP :
-				menu_accueil (A eviter), menu_edition, menu_publication,
+				menu_accueil (à éviter), menu_edition, menu_publication,
 				menu_activite, menu_squelette, menu_administration, menu_configuration 
 		<menu nom="github2spip" titre="github2spip:github2spip_titre" parent="menu_edition"  icone="images/github2spip-16.png" />
 		* parents d'onglets... configuration, plugins, statistiques, ... 
 		<onglet nom="github2spip" titre="github2spip:github2spip_titre" parent="configuration" icone="images/github2spip-24.png" />
 	-->
 
-	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+	<necessite nom="saisies" compatibilite="[2.4.0;]" /> 
+
 
 	<pipeline nom="autoriser" inclure="github2spip_autorisations.php" /> 
 

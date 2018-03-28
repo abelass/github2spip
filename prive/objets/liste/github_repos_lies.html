@@ -1,6 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
-	multi titre,1,
-	date,-1, 
+	multi nom,1,
+	date,-1,
 	id_github_repo,1
 }})
 ]
@@ -10,18 +10,18 @@
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
 #SET{debut,#ENV{debutgitl,#EVAL{_request("debutgitl");}}}
-#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#SET{afficher_lettres,#TRI|=={'multi nom'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies github_repos">
-<table class='spip liste'>
+<table class="spip liste">
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{github_repo:info_1_github_repo,github_repo:info_nb_github_repos}})</strong></caption>]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(GITHUB_REPOS){tout}{id_github_repo IN #GET{selection}}{where?}{statut?}
-			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_github_repo==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#TITRE**|extraire_multi|initiale|unique|oui)
+			{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_github_repo==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#NOM**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutgitl,@#ID_GITHUB_REPO}|ancre_url{paginationgitl}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutgitl,@#ID_GITHUB_REPO}|ancre_url{paginationgitl}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -29,35 +29,35 @@ a mis a jour la valeur avec la page reelle]
 				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
 			}
 		})]</B_lettre>
-		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
 
-		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class='titre' scope='col'>[(#TRI{multi titre,<:github_repo:label_titre:>,ajax})]</th>
-			<th class='action' scope='col'></th>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="nom" scope="col">[(#TRI{multi nom,<:github_repo:champ_nom_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_github_repos(GITHUB_REPOS){id_github_repo IN #GET{selection}}{statut?}
-		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} gitl}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_GITHUB_REPO|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='statut'>[(#STATUT|puce_statut{github_repo})]</td> 
-			<td class='titre'>[(#LOGO_GITHUB_REPO|image_reduire{20,20})]<a href="[(#ID_GITHUB_REPO|generer_url_entite{github_repo})]">#TITRE</a></td>
+		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} gitl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_GITHUB_REPO|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class="statut">[(#STATUT|puce_statut{github_repo})]</td> 
+			<td class="nom">[(#LOGO_GITHUB_REPO|image_reduire{20,20})]<a href="[(#ID_GITHUB_REPO|generer_url_entite{github_repo})]">#NOM</a></td>
 
-			<td class='action'>
+			<td class="action">
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[github_repo-#ID_GITHUB_REPO-#OBJET-#ID_OBJET\]" value="X"><:github_repo:retirer_lien_github_repo:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\[github_repo-#ID_GITHUB_REPO-#OBJET-#ID_OBJET\]" value="X"><:github_repo:retirer_lien_github_repo:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
 	</BOUCLE_liste_github_repos>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[github_repo-*-#OBJET-#ID_OBJET\]" value="X"><:github_repo:retirer_tous_liens_github_repos:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[github_repo-*-#OBJET-#ID_OBJET\]" value="X"><:github_repo:retirer_tous_liens_github_repos:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_github_repos>
-<div class="liste-objets liste-objets-lies GITHUB_REPOS caption-wrap">
+<div class="liste-objets liste-objets-lies github_repos caption-wrap">
 	<strong class="caption">[(#ENV*{titre,<:github_repo:info_aucun_github_repo:>})]</strong>
 </div>
 <//B_liste_github_repos>

@@ -1,14 +1,10 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi titre,1,
-	date,-1, 
+	date,-1,
 	id_github_depot,1
 }})
 ]
 #SET{selection,#ENV**{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
-#ENV
-<BOUCLE_lies(github_depots_liens){id_github_depot=#ID_OBJET}{objet=#ENV{objet}}>
-#ID_OBJET
-</BOUCLE_lies>
 #SET{debut,#ENV{debutgitl,#EVAL{_request("debutgitl");}}}
 <B_liste_github_depots>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
@@ -17,7 +13,7 @@ a mis a jour la valeur avec la page reelle]
 #SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies github_depots">
-<table class='spip liste'>
+<table class="spip liste">
 [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{github_depot:info_1_github_depot,github_depot:info_nb_github_depots}})</strong></caption>]
 	<thead>
 		#SET{p,''}
@@ -33,35 +29,35 @@ a mis a jour la valeur avec la page reelle]
 				#REM|afficher_initiale{#REM,#TOTAL_BOUCLE,#GET{debut},#ENV{nb,10}}
 			}
 		})]</B_lettre>
-		[<tr><td colspan="4"><p class='pagination'>(#GET{p})</p></td></tr>]
+		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
 
-		<tr class='first_row'>
-			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class='titre' scope='col'>[(#TRI{multi titre,<:github_depot:label_titre:>,ajax})]</th>
-			<th class='action' scope='col'></th>
+		<tr class="first_row">
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="titre" scope="col">[(#TRI{multi titre,<:github_depot:champ_titre_label:>,ajax})]</th>
+			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_liste_github_depots(GITHUB_DEPOTS){id_github_depot IN #GET{selection}}{statut?}
 		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} gitl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_GITHUB_DEPOT|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='statut'>[(#STATUT|puce_statut{github_depot})]</td> 
-			<td class='titre'>[(#LOGO_GITHUB_DEPOT|image_reduire{20,20})]<a href="[(#ID_GITHUB_DEPOT|generer_url_entite{github_depot})]">#TITRE</a></td>
+			<td class="statut">[(#STATUT|puce_statut{github_depot})]</td> 
+			<td class="titre">[(#LOGO_GITHUB_DEPOT|image_reduire{20,20})]<a href="[(#ID_GITHUB_DEPOT|generer_url_entite{github_depot})]">#TITRE</a></td>
 
-			<td class='action'>
+			<td class="action">
 				[(#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\[github_depot-#ID_GITHUB_DEPOT-#OBJET-#ID_OBJET\]" value="X"><:github_depot:retirer_lien_github_depot:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\[github_depot-#ID_GITHUB_DEPOT-#OBJET-#ID_OBJET\]" value="X"><:github_depot:retirer_lien_github_depot:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
 	</BOUCLE_liste_github_depots>
 	</tbody>
 </table>
-[<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[github_depot-*-#OBJET-#ID_OBJET\]" value="X"><:github_depot:retirer_tous_liens_github_depots:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[<p class="pagination">(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[github_depot-*-#OBJET-#ID_OBJET\]" value="X"><:github_depot:retirer_tous_liens_github_depots:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_github_depots>
-<div class="liste-objets liste-objets-lies GITHUB_DEPOTS caption-wrap">
+<div class="liste-objets liste-objets-lies github_depots caption-wrap">
 	<strong class="caption">[(#ENV*{titre,<:github_depot:info_aucun_github_depot:>})]</strong>
 </div>
 <//B_liste_github_depots>

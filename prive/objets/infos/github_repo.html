@@ -1,9 +1,11 @@
 <BOUCLE_github_repo(GITHUB_REPOS){id_github_repo=#ENV{id}}{statut?}>
-<div class='infos'>
+<div class="infos">
 [(#SET{texte_objet,<:github_repo:titre_github_repo:>})]
-<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_GITHUB_REPO</p></div>
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_GITHUB_REPO</p></div>
 
 [(#FORMULAIRE_INSTITUER_OBJET{github_repos,#ID_GITHUB_REPO})]
+
+<div class='nb_elements'><!--nb_elements--></div>
 
 [(#REM)
 

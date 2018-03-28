@@ -1,15 +1,21 @@
-[(#ID_OBJET|oui)
+[(#ID_GITHUB_DEPOT|oui)
 	[(#AUTORISER{modifier,github_depot,#ID_GITHUB_DEPOT}|sinon_interdire_acces)]
-][(#ID_OBJET|non)
+	[(#SET{id_parent,#INFO_{github_depot,#ID_GITHUB_DEPOT}})]
+]
+
+
+[(#ID_GITHUB_DEPOT|non)
 	[(#AUTORISER{creer,github_depot}|sinon_interdire_acces)]
 ]
- 
+
 #SET{redirect,#ENV{redirect}|sinon{#ID_GITHUB_DEPOT|?{#ID_GITHUB_DEPOT|generer_url_entite{github_depot},#URL_ECRIRE{github_depots}}}}
 
-<div class='cadre-formulaire-editer'>
+
+
+<div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
 	[(#ID_GITHUB_DEPOT|oui)
-	[(#GET{redirect}|icone_verticale{Retour,github_depot,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,github_depot,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
 	[
 		[(#ID_GITHUB_DEPOT|?{<:github_depot:icone_modifier_github_depot:>,<:github_depot:icone_creer_github_depot:>})]

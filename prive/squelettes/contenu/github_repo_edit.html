@@ -1,19 +1,25 @@
-[(#ID_OBJET|oui)
+[(#ID_GITHUB_REPO|oui)
 	[(#AUTORISER{modifier,github_repo,#ID_GITHUB_REPO}|sinon_interdire_acces)]
-][(#ID_OBJET|non)
+	[(#SET{id_parent,#INFO_{github_repo,#ID_GITHUB_REPO}})]
+]
+
+
+[(#ID_GITHUB_REPO|non)
 	[(#AUTORISER{creer,github_repo}|sinon_interdire_acces)]
 ]
- 
+
 #SET{redirect,#ENV{redirect}|sinon{#ID_GITHUB_REPO|?{#ID_GITHUB_REPO|generer_url_entite{github_repo},#URL_ECRIRE{github_repos}}}}
 
-<div class='cadre-formulaire-editer'>
+
+
+<div class="cadre-formulaire-editer">
 <div class="entete-formulaire">
 	[(#ID_GITHUB_REPO|oui)
-	[(#GET{redirect}|icone_verticale{Retour,github_repo,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	[(#GET{redirect}|icone_verticale{<:icone_retour:>,github_repo,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
 	[
 		[(#ID_GITHUB_REPO|?{<:github_repo:icone_modifier_github_repo:>,<:github_repo:icone_creer_github_repo:>})]
-		<h1>(#ENV{titre,#INFO_TITRE{github_repo,#ID_GITHUB_REPO}|sinon{<:info_sans_titre:>}})</h1>
+		<h1>(#ENV{titre,#INFO_NOM{github_repo,#ID_GITHUB_REPO}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
 
