@@ -8,12 +8,17 @@
 		<input type="hidden" name="id_github_repo" value="#ENV{id_github_repo}" />
 		<div class="editer-groupe">
 
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:github_repo:champ_nom_label:>})]
+
 			[(#SAISIE{input, user, obligatoire=oui,
 				label=<:github_repo:champ_user_label:>})]
 
 			[(#SAISIE{input, branch,
-				label=<:github_repo:champ_branch_label:>,
-				explication=<:github_repo:champ_branch_explication:> })]
+				label=<:github_repo:champ_branch_label:>})]
+
+			[(#SAISIE{input, tag,
+				label=<:github_repo:champ_tag_label:>})]
 
 		</div>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
