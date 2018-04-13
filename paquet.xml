@@ -1,7 +1,7 @@
 <paquet
 	prefix="github2spip"
 	categorie="outil"
-	version="1.0.1"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.16;3.2.*]"
 	logo="prive/themes/spip/images/github2spip-64.png"
@@ -20,25 +20,6 @@
 	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
-
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[2.4.0;]" />
-		<utilise nom="saisies" compatibilite="[2.4.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="github2spip_autorisations.php" />
-		<pipeline nom="insert_head" inclure="github2spip_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="github2spip" titre="github2spip:github2spip_titre" parent="menu_edition"  icone="images/github2spip-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="github2spip" titre="github2spip:github2spip_titre" parent="configuration" icone="images/github2spip-24.png" />
-	-->
 
 	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 
