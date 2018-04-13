@@ -1,5 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi nom,1,
+	branch,1,
+	tag,1,1,
 	date,-1,
 	id_github_repo,1
 }})
@@ -32,8 +34,10 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
 
 		<tr class="first_row">
-			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class="nom" scope="col">[(#TRI{multi nom,<:github_repo:champ_nom_label:>,ajax})]</th>
+			<th class="branch" scope="col"[(#TRI{branch,<:github_repo:champ_branch_label:>,ajax})]</th>
+			<th class="tag" scope="col"[(#TRI{tag,<:github_repo:champ_tag_label:>,ajax})]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
@@ -41,9 +45,10 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_github_repos(GITHUB_REPOS){id_github_repo IN #GET{selection}}{statut?}
 		{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} gitl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_GITHUB_REPO|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class="statut">[(#STATUT|puce_statut{github_repo})]</td> 
+			<td class="statut">[(#STATUT|puce_statut{github_repo})]</td>
 			<td class="nom">[(#LOGO_GITHUB_REPO|image_reduire{20,20})]<a href="[(#ID_GITHUB_REPO|generer_url_entite{github_repo})]">#NOM</a></td>
-
+			<td class="branch">#BRANCH</td>
+			<td class="tag">#TAG</td>
 			<td class="action">
 				[(#ENV{editable}|oui)
 					<button type="submit" class="button link delete" name="supprimer_lien\[github_repo-#ID_GITHUB_REPO-#OBJET-#ID_OBJET\]" value="X"><:github_repo:retirer_lien_github_repo:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
