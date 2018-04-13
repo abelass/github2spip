@@ -1,96 +1,36 @@
-[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<depot>
-<titre>[(#NOM_SITE_SPIP|textebrut)]</titre>
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<BOUCLE_depo(GITHUB_DEPOTS){id_github_depot}><depot>
+<titre>[(#TITRE|textebrut)]</titre>
 <descriptif>Outil communautaire sous SVN pour développer des squelettes, des scripts, des plugins, des outils... autour de SPIP. Ce dépôt ne contient que les plugins !</descriptif>
 <type>git</type>
-<url_serveur>https://github.com/abelass/</url_serveur>
-<url_archives>https://github.com/abelass</url_archives>
+<url_serveur>https://github.com/</url_serveur>
+<url_archives>https://github.com/</url_archives>
 <!--<url_commits>https://github.com/abelass</url_commits>-->
 </depot>
-
+<B_repos>
 <archives>
-<archive id="coordgmap.zip" dtd="paquet">
-<zip>
-	<file>/github2spip/archive/master.zip</file>
-	<size></size>
-	<date>1509719008</date>
-	<source></source>
-	<last_commit></last_commit>
-</zip>
-<traductions>
-<traduction module="github2spip" reference="fr">
-</traduction>
-</traductions>
-
-<paquet
-	prefix="github2spip"
-	categorie="outil"
-	version="1.0.0"
-	etat="dev"
-	compatibilite="[3.0.16;3.2.*]"
-	logo="prive/themes/spip/images/github2spip-64.png"
-	documentation=""
-	schema="1.0.0"
->
-	<!--
-		Paquet généré le 2018-03-28 14:51:20
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
-
-	<nom>Gestionnaire de dépots GitHub </nom>
-	<!-- Créer de dépots Spip depuis Github repositories -->
-
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
-	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
-
-	<licence>GNU/GPL</licence>
-
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[2.4.0;]" />
-		<utilise nom="saisies" compatibilite="[2.4.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="github2spip_autorisations.php" />
-		<pipeline nom="insert_head" inclure="github2spip_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="github2spip" titre="github2spip:github2spip_titre" parent="menu_edition"  icone="images/github2spip-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="github2spip" titre="github2spip:github2spip_titre" parent="configuration" icone="images/github2spip-24.png" />
-	-->
-
-	<necessite nom="saisies" compatibilite="[2.4.0;]" />
-
-
-	<pipeline nom="autoriser" inclure="github2spip_autorisations.php" />
-
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/github2spip.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/github2spip.php" />
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/github2spip.php" />
-	<pipeline nom="affiche_milieu" inclure="github2spip_pipelines.php" />
-	<pipeline nom="optimiser_base_disparus" inclure="github2spip_pipelines.php" />
-
-	<menu nom="github_depots" titre="github_depot:titre_github_depots" parent="menu_edition" icone="images/github_depot-16.png" action="github_depots" />
-	<menu nom="github_depot_creer" titre="github_depot:icone_creer_github_depot" parent="outils_rapides" icone="images/github_depot-new-16.png" action="github_depot_edit" parametres="new=oui" />
-	<menu nom="github_repos" titre="github_repo:titre_github_repos" parent="menu_edition" icone="images/github_repo-16.png" action="github_repos" />
-</paquet>
-<multis>
-<slogan>
-<multi>
-[fr]Gestionnaire de dépots GitHub
-</multi>
-</slogan>
-<description>
-<multi>
-[fr] teste
-</multi>
-</description>
-</multis>
-</archive>
-
+	<BOUCLE_repos(GITHUB_REPOS){id_github_depot}>
+	[(#BRANCH|?{
+		#SET{reference,#BRANCH},
+		[(#TAG|?{
+			#SET{reference,#TAG},
+			#SET{reference,master}
+		})]
+	})]
+	<archive id="#NOM.zip" dtd="paquet">
+		<zip>
+			<file>#USER/#NOM/archive/[(#GET{reference})].zip</file>
+			<size></size>
+			<date>[(#VAL|time)]</date>
+			<source></source>
+			<last_commit></last_commit>
+		</zip>
+		<traductions>
+		<traduction module="#NOM" reference="fr">
+		</traduction>
+		</traductions>
+		[(#USER|gs_info_file{#NOM,paquet.xml,#GET{reference}})]
+	</archive>
+</BOUCLE_repos>
 </archives>
-
+</B_repos>
+</BOUCLE_depo>
