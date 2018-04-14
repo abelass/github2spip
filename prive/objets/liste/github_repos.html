@@ -1,5 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
+	branch,1,
+	tag,1,1,
 	date,-1,
 	id_github_repo,1,
 	points,-1
@@ -11,9 +13,11 @@
 	<thead>
 		<tr class="first_row">
 			<th class="picto" scope="col"></th>
-			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class="nom" scope="col">[(#TRI{nom,<:github_repo:champ_nom_label:>,ajax})]</th>
-			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class="branch" scope="col"[(#TRI{branch,<:github_repo:champ_branch_label:>,ajax})]</th>
+			<th class="tag" scope="col"[(#TRI{tag,<:github_repo:champ_tag_label:>,ajax})]</th>
+			<th class="date" scope="col">[(#TRI{date,<:date:>,ajax})]</th>
 			<th class="id" scope="col">[(#TRI{id_github_repo,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
@@ -21,9 +25,11 @@
 	<BOUCLE_liste_github_repos(GITHUB_REPOS){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{par nom}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{github_repo-16.png}|balise_img)]</td>
-			<td class="statut">[(#STATUT|puce_statut{github_repo,#ID_GITHUB_REPO})]</td> 
+			<td class="statut">[(#STATUT|puce_statut{github_repo,#ID_GITHUB_REPO})]</td>
 			<td class="nom principale">[(#LOGO_GITHUB_REPO|image_reduire{20,26})]<a href="[(#ID_GITHUB_REPO|generer_url_entite{github_repo})]" title="<:info_numero_abbreviation|attribut_html:> #ID_GITHUB_REPO">[(#RANG). ]#NOM</a></td>
-			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td> 
+			<td class="branch">#BRANCH</td>
+			<td class="tag">#TAG</td>
+			<td class="date secondaire">[(#DATE|affdate_jourcourt)]</td>
 			<td class="id">[(#AUTORISER{modifier,github_repo,#ID_GITHUB_REPO}|?{
 				<a href="[(#URL_ECRIRE{github_repo_edit,id_github_repo=#ID_GITHUB_REPO})]">#ID_GITHUB_REPO</a>,
 				#ID_GITHUB_REPO
