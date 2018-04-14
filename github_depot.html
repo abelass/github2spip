@@ -6,31 +6,9 @@
 <url_archives>https://github.com/</url_archives>
 <!--<url_commits>https://github.com/abelass</url_commits>-->
 </depot>
-<B_repos>
+
 <archives>
-	<BOUCLE_repos(GITHUB_REPOS){id_github_depot}>
-	[(#BRANCH|?{
-		#SET{reference,#BRANCH},
-		[(#TAG|?{
-			#SET{reference,#TAG},
-			#SET{reference,master}
-		})]
-	})]
-	<archive id="#NOM.zip" dtd="paquet">
-		<zip>
-			<file>#USER/#NOM/archive/[(#GET{reference})].zip</file>
-			<size></size>
-			<date>[(#VAL|time)]</date>
-			<source></source>
-			<last_commit></last_commit>
-		</zip>
-		<traductions>
-		<traduction module="#NOM" reference="fr">
-		</traduction>
-		</traductions>
-		[(#USER|gs_contenu_document{#NOM,paquet.xml,#GET{reference}})]
-	</archive>
-</BOUCLE_repos>
+	<INCLURE {fond=inclure/repos, id_github_depot} />
 </archives>
-</B_repos>
+
 </BOUCLE_depo>
