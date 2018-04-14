@@ -2,7 +2,7 @@
 /**
  * Gestion du formulaire de d'édition de github_depot
  *
- * @plugin     Gestionnaire de dépots GitHub 
+ * @plugin     Gestionnaire de dépots GitHub
  * @copyright  2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
@@ -69,6 +69,10 @@ function formulaires_editer_github_depot_identifier_dist($id_github_depot = 'new
  */
 function formulaires_editer_github_depot_charger_dist($id_github_depot = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('github_depot', $id_github_depot, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	if (_request('new') == 'oui') {
+		$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie" />';
+	}
 	return $valeurs;
 }
 
@@ -139,9 +143,9 @@ function formulaires_editer_github_depot_traiter_dist($id_github_depot = 'new', 
 
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
-			
+
 			objet_associer(array('github_depot' => $id_github_depot), array($objet => $id_objet));
-			
+
 			if (isset($retours['redirect'])) {
 				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_github_depot, '&');
 			}
