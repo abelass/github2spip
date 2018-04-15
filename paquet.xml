@@ -1,22 +1,18 @@
 <paquet
 	prefix="github2spip"
 	categorie="outil"
-	version="1.1.0"
-	etat="dev"
+	version="1.1.1"
+	etat="test"
 	compatibilite="[3.0.16;3.2.*]"
 	logo="prive/themes/spip/images/github2spip-64.png"
 	documentation=""
 	schema="1.0.1"
 >
-	<!--
-		Paquet généré le 2018-03-28 14:51:20
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
+
 
 	<nom>Gestionnaire de dépots GitHub </nom>
 	<!-- Créer de dépots Spip depuis Github repositories -->
 
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
