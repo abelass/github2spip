@@ -1,8 +1,8 @@
 <?php
 /**
- * Utilisations de pipelines par Gestionnaire de dépots GitHub 
+ * Utilisations de pipelines par Gestionnaire de dépots GitHub
  *
- * @plugin     Gestionnaire de dépots GitHub 
+ * @plugin     Gestionnaire de dépots GitHub
  * @copyright  2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
