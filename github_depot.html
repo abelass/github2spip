@@ -8,7 +8,9 @@
 </depot>
 
 <archives>
-	<INCLURE {fond=inclure/repos, id_github_depot} />
+	<BOUCLE_liens(github_depots_liens){objet=github_depot}{id_objet=#ID_GITHUB_DEPOT}>
+		<INCLURE{fond=inclure/repos,id_github_depot} />
+	</BOUCLE_liens>
+	<INCLURE{fond=inclure/repos,id_github_depot} />
 </archives>
-
 </BOUCLE_depo>
