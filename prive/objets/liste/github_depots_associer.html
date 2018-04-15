@@ -4,7 +4,12 @@
 	id_github_depot,1
 }})
 ]
-#SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
+
+#SET{exclus, #ARRAY{}}
+<BOUCLE_liens(github_depots_liens)>
+#SET{exclus,#GET{exclus}|push{#ID_GITHUB_DEPOT}}
+</BOUCLE_liens>
+
 #SET{debut,#ENV{debutgita,#EVAL{_request("debutgita");}}}
 <B_liste_github_depots>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
