@@ -2,7 +2,7 @@
 /**
  * Fonctions du squelette associé
  *
- * @plugin     Gestionnaire de dépots GitHub 
+ * @plugin     Gestionnaire de dépots GitHub
  * @copyright  2018
  * @author     Rainer Müller
  * @licence    GNU/GPL
@@ -15,3 +15,4 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 // pour initiale et afficher_initiale
 include_spip('prive/objets/liste/auteurs_fonctions');
+

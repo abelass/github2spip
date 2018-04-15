@@ -5,8 +5,8 @@
 }})
 ]
 
-#SET{exclus, #ARRAY{}}
-<BOUCLE_liens(github_depots_liens)>
+#SET{exclus, #LISTE{#ENV{id_objet}}}
+<BOUCLE_liens(github_depots_liens){objet}{id_objet}>
 #SET{exclus,#GET{exclus}|push{#ID_GITHUB_DEPOT}}
 </BOUCLE_liens>
 

@@ -4,8 +4,9 @@
 	id_github_depot,1
 }})
 ]
+
 #SET{selection, #ARRAY{}}
-<BOUCLE_liens(github_depots_liens)>
+<BOUCLE_liens(github_depots_liens){objet}{id_objet}>
 #SET{selection,#GET{selection}|push{#ID_GITHUB_DEPOT}}
 </BOUCLE_liens>
 
