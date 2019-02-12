@@ -1,7 +1,7 @@
 <paquet
 	prefix="github2spip"
 	categorie="outil"
-	version="1.1.2"
+	version="1.1.3"
 	etat="test"
 	compatibilite="[3.0.16;3.2.*]"
 	logo="prive/themes/spip/images/github2spip-64.png"

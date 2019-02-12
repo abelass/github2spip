@@ -1,23 +1,23 @@
-<BOUCLE_repos(GITHUB_REPOS){id_github_depot}>
-[(#BRANCH|?{
-	#SET{reference,#BRANCH},
-	[(#TAG|?{
-		#SET{reference,#TAG},
-		#SET{reference,master}
+	<BOUCLE_repos(GITHUB_REPOS){id_github_depot}>
+	[(#BRANCH|?{
+		#SET{reference,#BRANCH},
+		[(#TAG|?{
+			#SET{reference,#TAG},
+			#SET{reference,master}
+		})]
 	})]
-})]
-<archive id="#NOM.zip" dtd="paquet">
-	<zip>
-		<file>#USER/#NOM/archive/[(#GET{reference})].zip</file>
-		<size></size>
-		<date>[(#VAL|time)]</date>
-		<source></source>
-		<last_commit></last_commit>
-	</zip>
-	<traductions>
-	<traduction module="#NOM" reference="fr">
-	</traduction>
-	</traductions>
-	[(#USER|gs_contenu_document{#NOM,paquet.xml,#GET{reference}})]
-</archive>
-</BOUCLE_repos>
+	<archive id="#NOM.zip" dtd="paquet">
+		<zip>
+			<file>#USER/#NOM/archive/[(#GET{reference})].zip</file>
+			<size></size>
+			<date>[(#VAL|time)]</date>
+			<source></source>
+			<last_commit></last_commit>
+		</zip>
+		<traductions>
+		<traduction module="#NOM" reference="fr">
+		</traduction>
+		</traductions>
+		[(#USER|gs_contenu_document{#NOM,paquet.xml,#GET{reference}})]
+	</archive>
+	</BOUCLE_repos>
