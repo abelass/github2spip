@@ -2,8 +2,8 @@
 /**
  * Fonctions du squelette associé
  *
- * @plugin     Gestionnaire de dépots GitHub 
- * @copyright  2018
+ * @plugin     Gestionnaire de dépots GitHub
+ * @copyright  2018 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Github2spip\Fonctions

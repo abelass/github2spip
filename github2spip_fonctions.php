@@ -1,9 +1,9 @@
 <?php
 /**
- * Fonctions utiles au plugin Gestionnaire de dépots GitHub 
+ * Fonctions utiles au plugin Gestionnaire de dépots GitHub
  *
- * @plugin     Gestionnaire de dépots GitHub 
- * @copyright  2018
+ * @plugin     Gestionnaire de dépots GitHub
+ * @copyright  2018 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Github2spip\Fonctions
@@ -19,5 +19,5 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * systématiquement chargés lors du calcul des squelettes.
  *
  * Il peut par exemple définir des filtres, critères, balises, …
- * 
+ *
  */

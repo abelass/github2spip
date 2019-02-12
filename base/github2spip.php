@@ -2,8 +2,8 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @plugin     Gestionnaire de dépots GitHub 
- * @copyright  2018
+ * @plugin     Gestionnaire de dépots GitHub
+ * @copyright  2018 - 2019
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Github2spip\Pipelines
@@ -46,7 +46,7 @@ function github2spip_declarer_tables_objets_sql($tables) {
 	$tables['spip_github_depots'] = array(
 		'type' => 'github_depot',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('githubdepot'), // table_objet('github_depot') => 'github_depots' 
+		'table_objet_surnoms' => array('githubdepot'), // table_objet('github_depot') => 'github_depots'
 		'field'=> array(
 			'id_github_depot'    => 'bigint(21) NOT NULL',
 			'titre'              => 'varchar(255) NOT NULL DEFAULT ""',
@@ -89,7 +89,7 @@ function github2spip_declarer_tables_objets_sql($tables) {
 	$tables['spip_github_repos'] = array(
 		'type' => 'github_repo',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('githubrepo'), // table_objet('github_repo') => 'github_repos' 
+		'table_objet_surnoms' => array('githubrepo'), // table_objet('github_repo') => 'github_repos'
 		'field'=> array(
 			'id_github_repo'     => 'bigint(21) NOT NULL',
 			'nom'                => 'varchar(255) NOT NULL DEFAULT ""',
