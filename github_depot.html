@@ -9,16 +9,16 @@
 <archives>
 		<BOUCLE_depos_lies(github_depots_liens){objet=github_depot}{id_objet=#ID_GITHUB_DEPOT}>
 			<BOUCLE_repos_lies(GITHUB_REPOS){id_github_depot}{doublons repos}>
-				<INCLURE{fond=inclure/repos,id_github_depot,id_github_depot,user,nom,branche,tag} />
+				<INCLURE{fond=inclure/repos,id_github_depot,id_github_depot,user,nom,branch,tag} />
 			</BOUCLE_repos_lies>
 				<BOUCLE_recursive(BOUCLE_depos_lies)>
 				</BOUCLE_recursive>
 		</BOUCLE_depos_lies>
 		<BOUCLE_repos_liens(GITHUB_REPOS){id_github_depot}{doublons repos}>
-			<INCLURE{fond=inclure/repos,id_github_depot,id_github_depot,user,nom,branche,tag} />
+			<INCLURE{fond=inclure/repos,id_github_depot,id_github_depot,user,nom,branch,tag} />
 		</BOUCLE_repos_liens>
 	<BOUCLE_repos_directe(GITHUB_REPOS){id_github_depot}{doublons repos}>
-		<INCLURE{fond=inclure/repos,id_github_depot,user,nom,branche,tag} />
+		<INCLURE{fond=inclure/repos,id_github_depot,user,nom,branch,tag} />
 	</BOUCLE_repos_directe>
 </archives>
 </BOUCLE_depo>
