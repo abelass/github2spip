@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Gestionnaire de dépots GitHub
  *
  * @plugin     Gestionnaire de dépots GitHub
- * @copyright  2018 - 2019
+ * @copyright  2018 - 2021
  * @author     Rainer Müller
  * @licence    GNU/GPL
  * @package    SPIP\Github2spip\Autorisations
